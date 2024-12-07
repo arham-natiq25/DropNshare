@@ -1,9 +1,6 @@
 <template>
   <div>
     <MultiFileUpload />
-    <h3>
-      hello
-    </h3>
   </div>
 </template>
 
