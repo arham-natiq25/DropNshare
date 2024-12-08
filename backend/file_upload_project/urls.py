@@ -18,13 +18,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from file_upload.views import FileUploadView, DownloadView ,serve_zip_file
+from file_upload.views import FileUploadView, DownloadView ,serve_zip_file,delete_all_zips
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/upload/', FileUploadView.as_view(), name='file-upload'),
     path('download/<str:filename>/', DownloadView.as_view(), name='download'),
     path('media/zips/<str:filename>', serve_zip_file, name='serve-zip-file'),
+    # path('delete-all-zips/', delete_all_zips, name='delete-all-zips'),
 ]
 
 if settings.DEBUG:

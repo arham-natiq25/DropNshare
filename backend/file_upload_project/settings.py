@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'file_upload.cleanup_middleware.CleanupMiddleware',  # Add this line
 ]
 
 ROOT_URLCONF = 'file_upload_project.urls'

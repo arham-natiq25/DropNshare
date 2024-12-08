@@ -63,9 +63,31 @@ class DownloadView(View):
 def serve_zip_file(request, filename):
     file_path = os.path.join(settings.MEDIA_ROOT, 'zips', filename)
     if os.path.exists(file_path):
+        file = open(file_path, 'rb')
         response = FileResponse(open(file_path, 'rb'))
         response['Content-Disposition'] = f'attachment; filename="{filename}"'
+
+        response.close = lambda: [
+            file.close(),  # First close the file
+            os.remove(file_path)  # Then delete it
+        ]
         return response
     else:
         return HttpResponse("File not found", status=404)
 
+
+def delete_all_zips(request):
+    zip_folder = os.path.join(settings.MEDIA_ROOT, 'zips')
+    deleted_count = 0
+
+    for filename in os.listdir(zip_folder):
+        file_path = os.path.join(zip_folder, filename)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+                deleted_count += 1
+        except Exception as e:
+            # If you want to log the error, you can print it or use Python's logging module
+            print(f"Error deleting {file_path}: {e}")
+
+    return HttpResponse(f"Deleted {deleted_count} zip files.")
