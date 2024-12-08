@@ -5,11 +5,11 @@
       <div class="container mx-auto flex justify-between items-center">
         <div class="flex items-center">
           <DropletIcon :class="[isDark ? 'text-blue-500' : 'text-blue-600', 'w-8 h-8 mr-2']" />
-          <span :class="[isDark ? 'text-white' : 'text-gray-800', 'text-xl font-bold']">
-            <a href="">
-              DropNShare
-            </a>
-          </span>
+            <span :class="[isDark ? 'text-white' : 'text-gray-800', 'text-xl font-bold']">
+              <a href="">
+                DropNShare
+              </a>
+            </span>
         </div>
         <button @click="toggleTheme" class="focus:outline-none">
           <SunIcon v-if="isDark" class="w-6 h-6 text-yellow-400" />
