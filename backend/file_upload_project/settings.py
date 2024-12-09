@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--e#u$0f2#_a57o=o^mvx3pva)*f#(&*h4d41y90d-hg_c(#&q^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','.vercel.app','.now.sh']
 
 
 # Application definition
@@ -55,7 +55,6 @@ MIDDLEWARE = [
         'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ROOT_URLCONF = 'file_upload_project.urls'
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -124,8 +123,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+import os
+STATICFILES_DIRS = os.path.join(BASE_DIR , 'static')
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build' , 'static')
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
