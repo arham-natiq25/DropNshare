@@ -1,17 +1,17 @@
 <template>
-  <div :class="[isDark ? 'bg-gray-900' : 'bg-gray-100', 'min-h-screen flex flex-col']">
+  <div :class="[isDark ? 'bg-gray-900' : 'bg-gray-100', 'min-h-screen flex flex-col transition-colors duration-300']">
     <!-- Navbar -->
     <nav :class="[isDark ? 'bg-gray-800' : 'bg-white', 'p-4 shadow-md']">
       <div class="container mx-auto flex justify-between items-center">
         <div class="flex items-center">
           <DropletIcon :class="[isDark ? 'text-blue-500' : 'text-blue-600', 'w-8 h-8 mr-2']" />
-            <span :class="[isDark ? 'text-white' : 'text-gray-800', 'text-xl font-bold']">
-              <a href="">
-                DropNShare
-              </a>
-            </span>
+          <span :class="[isDark ? 'text-white' : 'text-gray-800', 'text-xl font-bold']">
+            <a href="">
+              DropNShare
+            </a>
+          </span>
         </div>
-        <button @click="toggleTheme" class="focus:outline-none">
+        <button @click="toggleTheme" class="focus:outline-none transition-shadow duration-100 transform hover:scale-110">
           <SunIcon v-if="isDark" class="w-6 h-6 text-yellow-400" />
           <MoonIcon v-else class="w-6 h-6 text-gray-600" />
         </button>
@@ -52,7 +52,7 @@
             </p>
           </div>
   
-          <div v-if="files.length > 0" class="mt-8">
+          <div v-if="files.length > 0 && !downloadUrl" class="mt-8">
             <h2 :class="[isDark ? 'text-white' : 'text-gray-800', 'text-xl font-semibold mb-4']">Selected Files:</h2>
             <ul class="space-y-3">
               <li 
@@ -162,6 +162,7 @@
 import { ref } from 'vue'
 import { UploadCloudIcon, FileIcon, XIcon, DropletIcon, BriefcaseIcon, FacebookIcon, InstagramIcon, MailIcon, LinkedinIcon, SunIcon, MoonIcon } from 'lucide-vue-next'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'MultiFileUpload',
@@ -188,17 +189,29 @@ export default {
     const toggleTheme = () => {
       isDark.value = !isDark.value
     }
+
     const copyToClipboard = (text) => {
       navigator.clipboard.writeText(text).then(
         () => {
-          alert('URL copied to clipboard!');
+          Swal.fire({
+            title: 'Copied!',
+            text: 'URL copied to clipboard',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          });
         },
         (err) => {
           console.error('Failed to copy URL:', err);
+          Swal.fire({
+            title: 'Error',
+            text: 'Failed to copy URL',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         }
       );
     };
-
 
     const handleDrop = (e) => {
       isDragging.value = false
@@ -249,9 +262,25 @@ export default {
           }
         })
         downloadUrl.value = response.data.download_url
+        
+        // Show SweetAlert when upload is complete
+        Swal.fire({
+          title: 'Upload Complete!',
+          text: 'Your files have been successfully uploaded.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+
+        // Remove list of files once link is generated
+        files.value = []
       } catch (error) {
         console.error('Error uploading files:', error)
-        // Handle error (e.g., show an error message to the user)
+        Swal.fire({
+          title: 'Error',
+          text: 'There was an error uploading your files. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
       } finally {
         isUploading.value = false
       }
@@ -274,3 +303,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+/* Add any additional styles here if needed */
+</style>

@@ -1,0 +1,10 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "dropNshare/wsgi.py", "use": "@vercel/python" }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "your_project_name/wsgi.py" }
+    ]
+  }
+  
