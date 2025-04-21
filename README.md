@@ -1,6 +1,14 @@
-# DropNshare
+# 📁 Drop N Share – Effortless File Sharing via One Link
 
-**DropNshare** is a full-stack file-sharing application built with Python and Vue.js. It enables users to upload files and share them effortlessly via email and WhatsApp. The application features a user-friendly interface and a robust backend to manage file storage and sharing functionalities.
+**📂 GitHub Repository:** https://github.com/arham-natiq25/DropNshare
+
+---
+
+
+**Drop N Share** is a lightweight and efficient file-sharing tool built with **Laravel (backend)** and **Vue 3 (frontend)**. It allows users to upload multiple files at once, generates a unique shareable link, and enables downloading all files in a compressed **zip folder**.
+
+It’s designed to provide a seamless and clean experience — perfect for quickly sharing large numbers of files without any complexity.
+
 
 ## 🚀 Features
 
