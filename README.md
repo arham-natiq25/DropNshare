@@ -5,7 +5,7 @@
 ---
 
 
-**Drop N Share** is a lightweight and efficient file-sharing tool built with **Laravel (backend)** and **Vue 3 (frontend)**. It allows users to upload multiple files at once, generates a unique shareable link, and enables downloading all files in a compressed **zip folder**.
+**Drop N Share** is a lightweight and efficient file-sharing tool built with **Django (backend)** and **Vue 3 (frontend)**. It allows users to upload multiple files at once, generates a unique shareable link, and enables downloading all files in a compressed **zip folder**.
 
 It’s designed to provide a seamless and clean experience — perfect for quickly sharing large numbers of files without any complexity.
 
